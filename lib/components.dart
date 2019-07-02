@@ -46,11 +46,10 @@ class mycenteredimage extends StatelessWidget {
   @override
   Widget build(BuildContext context) { final double adjusted_height = MediaQuery.of(context).size.height/640;  final double adjusted_width = MediaQuery.of(context).size.width/360;
 
-  return Center(
-    child: Container(
-      width:adjusted_width*150.0,
-      height:adjusted_height*150.0,
-      margin: EdgeInsets.only(left: adjusted_width*27.0, right:adjusted_width*20.0),
+  return Container(
+      width:adjusted_width*360.0,
+      height:adjusted_height*220.0,
+    //  margin: EdgeInsets.only(left: adjusted_width*27.0, right:adjusted_width*20.0),
 
       decoration: BoxDecoration(
         color:Colors.red,
@@ -59,14 +58,14 @@ class mycenteredimage extends StatelessWidget {
           ),
           fit:BoxFit.cover,
         ),
-        borderRadius: BorderRadius.all(Radius.circular(adjusted_width*75.0)
-        ),
+//        borderRadius: BorderRadius.all(Radius.circular(adjusted_width*75.0)
+//        ),
         boxShadow: [
           BoxShadow(blurRadius: adjusted_width*7.0,color: Colors.black),
         ],
       ),
-    ),
-  );
+    );
+ // );
   }
 
 }

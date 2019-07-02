@@ -78,13 +78,16 @@ class _MyHomePageState extends State<MyHomePage> {
     final double adjusted_width = MediaQuery.of(context).size.width/360;
     return Scaffold(
       //appBar: AppBar(),
-      body: new Stack (
+      body: new Column (
           children:<Widget>[
-            Positioned(
-              width:adjusted_width*350.0,
-              top:MediaQuery.of(context).size.height/12 ,
-              child:Column(
-                children: <Widget>[
+        //    Positioned(
+            //  width:adjusted_width*350.0,
+             // top:MediaQuery.of(context).size.height/12 ,
+      //        Column(
+
+
+        //        children: <Widget>[
+
                   mycenteredimage(path: 'assets/logo.jpg'),  //the image
                   SizedBox(height: adjusted_height*15.0),
                   mytitletext(title: 'CHESTNET'), //COLLINS GRE
@@ -108,6 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
                   Container(
 
+
                     height: adjusted_height*150,
                     width: adjusted_width*300,
                     child: Center(
@@ -118,9 +122,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
                 ],
               ),
-            ),
-          ]
-      ),
+           // ),
+    //      ]
+  //    ),
 
 
 
@@ -208,12 +212,16 @@ class _MyHomePageState extends State<MyHomePage> {
         .of(context)
         .size
         .width / 360;
-    return Text(
-      "The diagnosis is- \n you have cancer",
-      style: TextStyle(
-        fontFamily: 'Quicksand',
-        fontWeight: FontWeight.normal,
-        fontSize: adjusted_height * 30.0,
+    return Center(
+      child: Text(
+
+        "The diagnosis is- \n you have canceraaaaaaaaaaaaaaaaaa",
+        style: TextStyle(
+          fontFamily: 'Quicksand',
+          fontWeight: FontWeight.normal,
+          fontSize: adjusted_height * 20.0,
+        ),
+        textAlign: TextAlign.center,
       ),
     );
   }
