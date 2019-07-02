@@ -74,3 +74,31 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
+  fonts:
+  - family: Montserrat
+    fonts:
+    - asset: assets/Montserrat-Regular.ttf
+    - asset: assets/Montserrat-Bold.ttf
+    - asset: assets/Montserrat-Light.ttf
+    - asset: assets/Montserrat-LightItalic.ttf
+      weight: 700
+  - family: Montserrat
+    fonts:
+    - asset: assets/Montserrat-Regular.ttf
+    - asset: assets/Montserrat-ExtraBoldItalic.ttf
+      style: italic
+  - family: Montserrat
+    fonts:
+    - asset: assets/Montserrat-Regular.ttf
+    - asset: assets/Montserrat-ExtraBold.ttf
+      weight: 700
+  - family: Montserrat
+    fonts:
+    - asset: assets/Montserrat-SemiBold.ttf
+    - asset: assets/Montserrat-SemiBoldItalic.ttf
+      style: italic
+  - family: Quicksand
+    fonts:
+    - asset: assets/Quicksand-Medium.ttf
+    - asset: assets/Quicksand-Bold.ttf
+      weight: 700

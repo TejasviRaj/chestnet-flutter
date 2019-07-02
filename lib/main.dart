@@ -70,8 +70,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String message="Welcome";
+  String message="Please select an image.";
   File _image;
+  String data="";
+
   @override
   Widget build(BuildContext context) {
     final double adjusted_height = MediaQuery.of(context).size.height/640;
@@ -137,6 +139,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       _image = image;
+      data="";
+      message="Now you can upload the file or choose another image.";
     });
   }
 
@@ -144,16 +148,31 @@ class _MyHomePageState extends State<MyHomePage> {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
+      data="";
+
       _image = image;
+        message="Now you can upload the image or choose another image.";
+
     });
   }
 
   void Upload() async {
 
+    if (_image== null)
+      {
+        setState(() {
+          data="";
 
+          message="Please select an image before uploading";
+        });
+
+        return;
+
+
+      }
 
     setState(() {
-      message="Loading...";
+      message="Processing...";
     });
 
 
@@ -183,7 +202,8 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         if (response.statusCode==200)
           {
-            message = value;
+            data = value;
+            message="You may upload another image if you like";
 
           }
           else if (response.statusCode==403)
@@ -198,7 +218,7 @@ class _MyHomePageState extends State<MyHomePage> {
       });
 
     });
-
+    _image=null;
 
   }
 
@@ -213,16 +233,32 @@ class _MyHomePageState extends State<MyHomePage> {
         .size
         .width / 360;
     return Center(
-      child: Text(
+      child: Column(
+        children: <Widget>[
+          SizedBox(height: adjusted_height*10,),
+          Text(
 
-        "The diagnosis is- \n you have canceraaaaaaaaaaaaaaaaaa",
-        style: TextStyle(
-          fontFamily: 'Quicksand',
-          fontWeight: FontWeight.normal,
-          fontSize: adjusted_height * 20.0,
-        ),
-        textAlign: TextAlign.center,
-      ),
+            data,
+            style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontWeight: FontWeight.normal,
+              fontSize: adjusted_height * 30.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+
+          Text(
+
+            message,
+            style: TextStyle(
+              fontFamily: 'Quicksand',
+              fontWeight: FontWeight.normal,
+              fontSize: adjusted_height *15.0,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      )
     );
   }
 
@@ -252,7 +288,7 @@ class learnedwordsbutton extends StatelessWidget {
   return Center(
     child:Container(
       height:adjusted_height*50.0,
-      width:adjusted_width*150.0,
+      width:adjusted_width*160.0,
       margin: EdgeInsets.only(top: adjusted_height*0.0, bottom:adjusted_height*20.0),
 
 
