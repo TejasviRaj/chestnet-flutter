@@ -69,7 +69,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  String message="Welcome";
   File _image;
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
           (_image == null)
               ? Text('No Image Selected')
               : Text("imager"),
-          Text("hello"),
+          Text(message),
         ],
       ),
     );
@@ -131,36 +131,28 @@ class _MyHomePageState extends State<MyHomePage> {
     print(response.statusCode);
     response.stream.transform(utf8.decoder).listen((value) {
       print(value);
+      setState(() {
+        if (response.statusCode==200)
+          {
+            message = value;
+
+          }
+          else if (response.statusCode==403)
+            {
+              message="Permission Error";
+            }
+
+            else if (response.statusCode==404)
+              {
+                message="Not found";
+              }
+      });
+
     });
+
+
   }
 
 }
 
 
-
-//void _choose() async {
-//  file = await ImagePicker.pickImage(source: ImageSource.camera);
-//// file = await ImagePicker.pickImage(source: ImageSource.gallery);
-//}
-//
-//void _upload() async {
-//  print("hello");
-//
-////  String base64Image = base64Encode(file.readAsBytesSync());
-////  String fileName = file.path.split("/").last;
-//
-//
-// // print("base64=" + base64Image.length.toString() );
-//
-//  createPost().then((res) {
-//    print(res.statusCode);
-//    print(res.body);
-//
-//    print("bye");
-//
-//  }).catchError((err) {
-//    print("lol");
-//  });
-//
-//}
-//
