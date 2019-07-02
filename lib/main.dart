@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
+import 'components.dart';
 
 final String phpEndPoint = 'http://192.168.100.97:8000/second/';
 final String nodeEndPoint = 'http://192.168.43.171:3000/image';
@@ -73,36 +74,57 @@ class _MyHomePageState extends State<MyHomePage> {
   File _image;
   @override
   Widget build(BuildContext context) {
+    final double adjusted_height = MediaQuery.of(context).size.height/640;
+    final double adjusted_width = MediaQuery.of(context).size.width/360;
     return Scaffold(
-      appBar: AppBar(),
-      body: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              RaisedButton(
-                onPressed: getImage,
-                child: Text('Choose Image'),
-              ),
-             // SizedBox(width: 10.0),
-              RaisedButton(
-                onPressed: getImageGallery,
-                child: Text('Choose Image from gallery'),
-              ),
-              //SizedBox(width: 10.0),
+      //appBar: AppBar(),
+      body: new Stack (
+          children:<Widget>[
+            Positioned(
+              width:adjusted_width*350.0,
+              top:MediaQuery.of(context).size.height/12 ,
+              child:Column(
+                children: <Widget>[
+                  mycenteredimage(path: 'assets/logo.jpg'),  //the image
+                  SizedBox(height: adjusted_height*15.0),
+                  mytitletext(title: 'CHESTNET'), //COLLINS GRE
+                  SizedBox(height: adjusted_height*15.0),
+                  mysubtext(),  //A Complete GRE Preparation
+                  SizedBox(height:adjusted_height*50.0),
+                  Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      learnedwordsbutton(w: this,action: 0),
+                      SizedBox(width:adjusted_width*30.0),
 
-            ],
-          ),
-          RaisedButton(
-            onPressed: Upload,
-            child: Text('Upload Image'),
-          ),
-          (_image == null)
-              ? Text('No Image Selected')
-              : Text("imager"),
-          Text(message),
-        ],
+
+                      learnedwordsbutton(w: this,action:1),
+                  //    SizedBox(width:adjusted_width*25.0),
+
+                    ],
+                  ),
+
+                  logoutbutton(w:this),
+
+                  Container(
+
+                    height: adjusted_height*150,
+                    width: adjusted_width*300,
+                    child: Center(
+                      child: buildCard(context),
+                    ),
+                  ),
+
+
+                ],
+              ),
+            ),
+          ]
       ),
+
+
+
+
     );
   }
 
@@ -123,6 +145,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void Upload() async {
+
+
+
+    setState(() {
+      message="Loading...";
+    });
+
+
+
     print("hellp");
     //File imageFile = await ImagePicker.pickImage(source: ImageSource.camera);
     File imageFile=_image;
@@ -167,6 +198,125 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
+  Widget buildCard(BuildContext context)
+  {
+    double adjusted_height = MediaQuery
+        .of(context)
+        .size
+        .height / 640;
+    double adjusted_width = MediaQuery
+        .of(context)
+        .size
+        .width / 360;
+    return Text(
+      "The diagnosis is- \n you have cancer",
+      style: TextStyle(
+        fontFamily: 'Quicksand',
+        fontWeight: FontWeight.normal,
+        fontSize: adjusted_height * 30.0,
+      ),
+    );
+  }
+
+
+
 }
 
 
+class learnedwordsbutton extends StatelessWidget {
+
+  learnedwordsbutton({this.w,this.action})
+  {
+    if (action==0)
+      name="Take a picture";
+    else
+      name="Choose from Gallery";
+  }
+
+  final _MyHomePageState w;
+  int action;
+  String name;
+  @override
+  Widget build(BuildContext context) { final double adjusted_height = MediaQuery.of(context).size.height/640;  final double adjusted_width = MediaQuery.of(context).size.width/360;
+
+
+
+  return Center(
+    child:Container(
+      height:adjusted_height*50.0,
+      width:adjusted_width*150.0,
+      margin: EdgeInsets.only(top: adjusted_height*0.0, bottom:adjusted_height*20.0),
+
+
+      child:GestureDetector(
+        onTap:() {
+          if (action==0)
+          w.getImage();
+          else
+            w.getImageGallery();
+        },
+        child: Material(
+          borderRadius: BorderRadius.circular(adjusted_height*20.0),
+          shadowColor: Colors.blueGrey,
+          color: Colors.blueGrey,
+          elevation: 7.0,
+
+          child:Center(
+            child: Text(
+              name,
+              style:TextStyle(color: Colors.white,fontFamily:'Montserrat',
+              ),
+            ),
+          ),
+        ),
+      ),
+
+    ),
+  ) ;
+  }
+}
+
+class logoutbutton extends StatelessWidget {
+
+  logoutbutton({this.w});
+
+  _MyHomePageState w;
+  @override
+  Widget build(BuildContext context) {
+
+    final double adjusted_height = MediaQuery.of(context).size.height/640;
+    final double adjusted_width = MediaQuery.of(context).size.width/360;
+
+
+
+    return Center(
+      child:Container(
+        height:adjusted_height*40.0,
+        width:adjusted_width*120.0,
+        margin: EdgeInsets.only(left: adjusted_width*27.0, right:adjusted_width*20.0),
+
+        child:GestureDetector(
+          onTap:() {
+            // Navigator.pushNamed(context, this.path);
+            w.Upload();
+          },
+          child: Material(
+            borderRadius: BorderRadius.circular(adjusted_height*20.0),
+            shadowColor: Colors.blueAccent,
+            color: Colors.blueAccent,
+            elevation: 7.0,
+
+            child:Center(
+              child: Text(
+                "Upload",
+                style:TextStyle(color: Colors.white,fontFamily:'Montserrat',
+                ),
+              ),
+            ),
+          ),
+        ),
+
+      ),
+    ) ;
+  }
+}

@@ -1,0 +1,30 @@
+
+      Column(
+        children: <Widget>[
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              RaisedButton(
+                onPressed: getImage,
+                child: Text('Choose Image'),
+              ),
+             // SizedBox(width: 10.0),
+              RaisedButton(
+                onPressed: getImageGallery,
+                child: Text('Choose Image from gallery'),
+              ),
+              //SizedBox(width: 10.0),
+
+            ],
+          ),
+          RaisedButton(
+            onPressed: Upload,
+            child: Text('Upload Image'),
+          ),
+          (_image == null)
+              ? Text('No Image Selected')
+              : Text("imager"),
+          Text(message),
+        ],
+      ),
