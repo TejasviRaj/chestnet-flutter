@@ -84,12 +84,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: getImage,
                 child: Text('Choose Image'),
               ),
-              SizedBox(width: 10.0),
+             // SizedBox(width: 10.0),
               RaisedButton(
-                onPressed: Upload,
-                child: Text('Upload Image'),
-              )
+                onPressed: getImageGallery,
+                child: Text('Choose Image from gallery'),
+              ),
+              //SizedBox(width: 10.0),
+
             ],
+          ),
+          RaisedButton(
+            onPressed: Upload,
+            child: Text('Upload Image'),
           ),
           (_image == null)
               ? Text('No Image Selected')
@@ -102,6 +108,14 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  Future getImageGallery() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
     setState(() {
       _image = image;
