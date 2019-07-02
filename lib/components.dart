@@ -84,7 +84,7 @@ class mytitletext extends StatelessWidget {
     Text(
       this.title,
       style: TextStyle(
-        fontSize: adjusted_height*adjusted_height*30.0,
+        fontSize: adjusted_height*adjusted_height*35.0,
         fontWeight: FontWeight.bold,
         fontFamily: 'MontSerrat',
       ),
