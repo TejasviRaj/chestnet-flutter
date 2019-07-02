@@ -70,9 +70,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String message="Please select an image.";
+  String message="Please select a chest\n x-ray image for diagnosis.";
   File _image;
   String data="";
+  int textSize=27;
 
   @override
   Widget build(BuildContext context) {
@@ -91,11 +92,11 @@ class _MyHomePageState extends State<MyHomePage> {
         //        children: <Widget>[
 
                   mycenteredimage(path: 'assets/logo.jpg'),  //the image
-                  SizedBox(height: adjusted_height*15.0),
+                  SizedBox(height: adjusted_height*10.0),
                   mytitletext(title: 'CHESTNET'), //COLLINS GRE
-                  SizedBox(height: adjusted_height*15.0),
+                //  SizedBox(height: adjusted_height*5.0),
                   mysubtext(),  //A Complete GRE Preparation
-                  SizedBox(height:adjusted_height*50.0),
+                  SizedBox(height:adjusted_height*15.0),
                   Row(
                      mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -140,7 +141,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _image = image;
       data="";
-      message="Now you can upload the file or choose another image.";
+      textSize=26;
+      message="Now you can upload the selected x-ray image or choose another image.";
     });
   }
 
@@ -149,9 +151,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       data="";
-
+      textSize=26;
       _image = image;
-        message="Now you can upload the image or choose another image.";
+      message="Now you can upload the selected x-ray image or choose another image.";
 
     });
   }
@@ -162,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
       {
         setState(() {
           data="";
-
+          textSize=27;
           message="Please select an image before uploading";
         });
 
@@ -203,6 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
         if (response.statusCode==200)
           {
             data = value;
+            textSize=15;
             message="You may upload another image if you like";
 
           }
@@ -236,6 +239,19 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Column(
         children: <Widget>[
           SizedBox(height: adjusted_height*10,),
+
+
+          Text(
+
+            message,
+            style: TextStyle(
+              fontFamily: 'Quicksand',
+              fontWeight: FontWeight.normal,
+              fontSize: adjusted_height *textSize,
+            ),
+            textAlign: TextAlign.center,
+          ),
+
           Text(
 
             data,
@@ -247,16 +263,6 @@ class _MyHomePageState extends State<MyHomePage> {
             textAlign: TextAlign.center,
           ),
 
-          Text(
-
-            message,
-            style: TextStyle(
-              fontFamily: 'Quicksand',
-              fontWeight: FontWeight.normal,
-              fontSize: adjusted_height *15.0,
-            ),
-            textAlign: TextAlign.center,
-          ),
         ],
       )
     );
