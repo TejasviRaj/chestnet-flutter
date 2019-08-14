@@ -186,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
     var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     var length = await imageFile.length();
 
-    var uri = Uri.parse("http://192.168.100.97:8000/mult/");
+    var uri = Uri.parse("http://10.42.0.1:8000/mult/");
 
     uri.replace(port: 8000);
 
@@ -258,7 +258,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextStyle(
               fontFamily: 'Montserrat',
               fontWeight: FontWeight.normal,
-              fontSize: adjusted_height * 30.0,
+              fontSize: adjusted_height * 20.0,
             ),
             textAlign: TextAlign.center,
           ),
